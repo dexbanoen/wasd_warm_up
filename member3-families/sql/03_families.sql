@@ -76,7 +76,7 @@ CREATE TABLE MinorGuardians (
 --   ClubMembers 1 Marc Tremblay    (major, NBA games, Montreal)
 --   ClubMembers 2 Sophie Gagnon    (major, NBA games, Laval)
 --   ClubMembers 3 Karim Haddad     (major, NO NBA games)
---   ClubMembers 4 Ahmed Benali     (major, NBA games, Gatineau)
+--   ClubMembers 4 Hassan Benali    (major, NBA games, Gatineau)
 --   ClubMembers 11-22               minors, one per guardian row
 --   Locations 1-5                   Montreal (Head), Laval, Longueuil,
 --                                   Quebec, Gatineau
@@ -92,8 +92,8 @@ INSERT INTO FamilyMembers
        '45 Boulevard Le Carrefour',   'Laval',     'QC', 'H7T1C7', 'sophie.gagnon@mail.ca',    2),
   (3,  'Karim',    'Haddad',   '1980-11-05', '100000003', 'HADK80110511', '450-555-0103',
        '88 Rue Saint-Charles O',      'Longueuil', 'QC', 'J4H1C9', 'karim.haddad@mail.ca',     3),
-  (4,  'Ahmed',    'Benali',   '1984-02-27', '100000004', 'BENA84022711', '819-555-0104',
-       '25 Rue Laurier',              'Gatineau',  'QC', 'J8X3W9', 'ahmed.benali@mail.ca',     5),
+  (4,  'Hassan',   'Benali',   '1984-02-27', '100000004', 'BENA84022711', '819-555-0104',
+       '25 Rue Laurier',              'Gatineau',  'QC', 'J8X3W9', 'hassan.benali@mail.ca',    5),
   -- family members who are not club members
   (5,  'Nathalie', 'Roy',      '1979-01-30', '200000005', 'ROYN79513011', '514-555-0105',
        '300 Avenue du Parc',          'Montréal',  'QC', 'H2V4G1', 'nathalie.roy@mail.ca',     1),
@@ -118,7 +118,7 @@ INSERT INTO MinorGuardians (memberID, familyMemberID, relationship) VALUES
   (12, 1,  'Father'),       -- Noah Tremblay     <- Marc Tremblay (2 children)
   (13, 2,  'Mother'),       -- Emma Gagnon       <- Sophie Gagnon
   (14, 3,  'Father'),       -- Yasmine Haddad    <- Karim Haddad
-  (15, 4,  'Father'),       -- Adam Benali       <- Ahmed Benali
+  (15, 4,  'Father'),       -- Adam Benali       <- Hassan Benali
   (16, 5,  'Mother'),       -- Olivier Roy       <- Nathalie Roy
   (17, 6,  'Grandfather'),  -- Chloé Lavoie      <- Pierre Lavoie
   (18, 7,  'Grandmother'),  -- Thomas Bouchard   <- Monique Bouchard

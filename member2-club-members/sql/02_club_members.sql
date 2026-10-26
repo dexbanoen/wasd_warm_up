@@ -67,7 +67,7 @@ INSERT INTO ClubMembers (MemberID, FirstName, LastName, DOB, JoinDate, SSN, Medi
     (1, 'Marc', 'Tremblay', '1985-03-14', '2023-03-10', '100000001', 'TREM85031411', '514-555-0101', '1200 Rue Sainte-Catherine O', 'Montréal', 'QC', 'H3G1P1', 'marc.tremblay@mail.ca', 1),
     (2, 'Sophie', 'Gagnon', '1983-07-22', '2023-04-12', '100000002', 'GAGS83572211', '450-555-0102', '45 Boulevard Le Carrefour', 'Laval', 'QC', 'H7T1C7', 'sophie.gagnon@mail.ca', 2),
     (3, 'Karim', 'Haddad', '1980-11-05', '2023-06-08', '100000003', 'HADK80110511', '450-555-0103', '88 Rue Saint-Charles O', 'Longueuil', 'QC', 'J4H1C9', 'karim.haddad@mail.ca', 3),
-    (4, 'Ahmed', 'Benali', '1984-02-27', '2023-05-19', '100000004', 'BENA84022711', '819-555-0104', '25 Rue Laurier', 'Gatineau', 'QC', 'J8X3W9', 'ahmed.benali@mail.ca', 5),
+    (4, 'Hassan', 'Benali', '1984-02-27', '2023-05-19', '100000004', 'BENA84022711', '819-555-0104', '25 Rue Laurier', 'Gatineau', 'QC', 'J8X3W9', 'hassan.benali@mail.ca', 5),
     (5, 'Nadia', 'Rahman', '1996-08-09', '2024-03-08', '300000005', 'MEM000000005', '514-555-1005', '105 Rue des Érables', 'Montréal', 'QC', 'H3G2C1', 'nadia.rahman@example.org', 1),
     (6, 'Omar', 'Khan', '1999-04-12', '2024-04-07', '300000006', 'MEM000000006', '450-555-1006', '106 Rue des Érables', 'Laval', 'QC', 'H7N2A3', 'omar.khan@example.org', 2),
     (7, 'Amelia', 'Chen', '2002-07-12', '2023-05-14', '300000007', 'MEM000000007', '418-555-1007', '107 Rue des Érables', 'Québec', 'QC', 'G1R2K5', 'amelia.chen@example.org', 4),
