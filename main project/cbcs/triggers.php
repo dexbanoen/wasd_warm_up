@@ -1,5 +1,4 @@
 <?php
-// Items 20 and 21: the triggers of the system, and how to see each rule being enforced.
 require 'lib.php';
 page_start('Triggers and integrity');
 echo '<p>Every rule below is enforced by the database itself. To see one at work, try the action in the page named in the last column: the database rejects it and the page shows the message.</p>';
@@ -28,4 +27,3 @@ foreach (rows('SELECT TRIGGER_NAME, ACTION_TIMING, EVENT_MANIPULATION, EVENT_OBJ
     echo '<pre>CREATE TRIGGER ' . h($t['TRIGGER_NAME']) . "\n" . h($t['ACTION_TIMING'] . ' ' . $t['EVENT_MANIPULATION'] . ' ON ' . $t['EVENT_OBJECT_TABLE'])
         . "\nFOR EACH ROW\n" . h($t['ACTION_STATEMENT']) . '</pre>';
 }
-page_end();

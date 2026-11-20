@@ -1,5 +1,4 @@
 <?php
-// Item 22: generate the emails for the sessions of the coming week, and show the email log.
 // "Today" can be changed in the form to show what the system does on any Sunday.
 require 'lib.php';
 $error = ''; $day = get('day', post('day', date('Y-m-d')));
@@ -28,4 +27,3 @@ table(rows('SELECT v.sender, v.receiver, v.subject, v.body FROM v_SessionEmails 
 echo '<form method="post" action="emails.php"><input type="hidden" name="day" value="' . h($day) . '"><p><button>Generate these emails and record them in the log</button></p></form>';
 echo '<h2>Email log (newest first)</h2>';
 table(rows('SELECT emailID, emailDate, sender, receiver, subject, body FROM EmailLog ORDER BY emailID DESC'));
-page_end();

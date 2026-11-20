@@ -35,4 +35,3 @@ if ($a == 'new' || $a == 'edit') {
             return '<a class="btn small" href="teams.php?a=edit&id=' . $r['teamID'] . '">Edit</a> ' . delete_button('teams.php', $r['teamID'], 'team ' . $r['name']);
         });
 }
-page_end();

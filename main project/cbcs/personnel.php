@@ -1,6 +1,4 @@
 <?php
-// Item 2: create, display, edit and delete a personnel member, and change the assignment
-// (location, role, mandate). A personnel member has one assignment at a time.
 require 'lib.php';
 $a = get('a', 'list'); $error = '';
 $PROLES = array('Administrator' => 'Administrator', 'Captain' => 'Captain', 'Coach' => 'Coach', 'Assistant Coach' => 'Assistant Coach', 'Other' => 'Other');
@@ -12,7 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             go('personnel.php?msg=' . urlencode('Personnel member deleted.'));
         }
         db()->beginTransaction();
-        if ($a == 'assign') {            // end the current assignment the day before, then start the new one
+        if ($a == 'assign') {
+            // end the current assignment the day before, then start the new one
             $id = post('id');
             q('UPDATE PersonnelAssignments SET endDate = DATE_SUB(?, INTERVAL 1 DAY) WHERE personnelID = ? AND endDate IS NULL',
                 array(post('startDate'), $id));
@@ -95,4 +94,3 @@ if ($a == 'new' || $a == 'edit') {
                 . delete_button('personnel.php', $r['personnelID'], $r['firstName'] . ' ' . $r['lastName']);
         });
 }
-page_end();

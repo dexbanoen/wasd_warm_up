@@ -1,6 +1,4 @@
 <?php
-// Queries 8 to 19. Generated from sql/CBCS_Main_5_Queries.sql: the same SQL, with the values
-// a user can choose replaced by named parameters (:member, :location, :dateFrom, :dateTo).
 $QUERIES = array();
 $QUERIES[8] = array('text' => 'For every location, its tallest minor club member: location name, first-name, last-name, height and age. Two or more members with the same height can be the tallest of a location (Montréal has two). Sorted by age.',
     'params' => array(),

@@ -1,5 +1,4 @@
 <?php
-// Item 1: create, display, edit and delete a location.
 require 'lib.php';
 $a = get('a', 'list'); $error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -63,4 +62,3 @@ if ($a == 'new' || $a == 'edit') {
                 . delete_button('locations.php', $r['locationID'], 'location ' . $r['name']);
         });
 }
-page_end();

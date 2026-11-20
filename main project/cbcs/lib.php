@@ -32,7 +32,8 @@ function go($url) { header('Location: ' . $url); exit; }
 function friendly($e) {
     $code = isset($e->errorInfo[1]) ? $e->errorInfo[1] : 0;
     $text = isset($e->errorInfo[2]) ? $e->errorInfo[2] : $e->getMessage();
-    if ($code == 1644) return $text;                               // message of a trigger (SIGNAL)
+    // message of a trigger (SIGNAL)
+    if ($code == 1644) return $text;
     if ($code == 1451) return 'Rejected: it cannot be deleted because other records still refer to it.';
     if ($code == 1452) return 'Rejected: it refers to a record that does not exist.';
     if ($code == 1062) return 'Rejected: this value already exists and must be unique. (' . $text . ')';
@@ -77,7 +78,6 @@ function page_start($title) {
     echo '</nav></header><main><h1>' . h($title) . '</h1>';
     if (get('msg') !== '') echo '<p class="ok">' . h(get('msg')) . '</p>';
 }
-function page_end() { echo '</main><footer>COMP 353 Main Project, Fall 2026 - group xpc353_2</footer></body></html>'; }
 function show_error($error) { if ($error) echo '<p class="err">' . h($error) . '</p>'; }
 
 // Print a list of rows as an HTML table. $actions($row) returns the HTML of the last column.
@@ -105,7 +105,8 @@ function select($label, $name, $options, $selected = '', $extra = '') {
         echo '<option value="' . h($value) . '"' . ((string)$value === (string)$selected ? ' selected' : '') . '>' . h($text) . '</option>';
     echo '</select></label>';
 }
-function options($sql) {   // first column = value, second column = text
+// first column = value, second column = text
+function options($sql) {
     $out = array();
     foreach (q($sql)->fetchAll(PDO::FETCH_NUM) as $r) $out[$r[0]] = $r[1];
     return $out;

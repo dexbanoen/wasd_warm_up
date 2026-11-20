@@ -1,6 +1,4 @@
 <?php
-// Items 5 and 6: sessions (games and training sessions), their two team formations,
-// and the players assigned to each formation with their role.
 require 'lib.php';
 $a = get('a', 'list'); $error = ''; $sid = get('id');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -24,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             q('UPDATE TeamFormations SET headCoachID = ?, score = ? WHERE formationID = ?', array(post('headCoachID'), nul(post('score')), post('formationID')));
         } elseif ($a == 'delformation') {
             q('DELETE FROM TeamFormations WHERE formationID = ?', array(post('formationID')));
-        } elseif ($a == 'assign') {       // triggers 7 to 10 check this INSERT
+        } elseif ($a == 'assign') {
+            // triggers 7 to 10 check this INSERT
             q('INSERT INTO FormationPlayers (formationID, memberID, role) VALUES (?, ?, ?)', array(post('formationID'), post('memberID'), post('role')));
         } elseif ($a == 'editplayer') {
             q('UPDATE FormationPlayers SET role = ? WHERE formationID = ? AND memberID = ?', array(post('role'), post('formationID'), post('memberID')));
@@ -105,4 +104,3 @@ if ($a == 'new' || $a == 'edit') {
                 . delete_button('sessions.php', $r['sessionID'], 'session ' . $r['sessionID']);
         });
 }
-page_end();

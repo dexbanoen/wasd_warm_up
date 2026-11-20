@@ -1,5 +1,4 @@
 <?php
-// Item 3: create, display, edit and delete a family member.
 // The primary family member is in FamilyMembers; the secondary family member (a second
 // contact named by the primary one) is in SecondaryFamilyMembers.
 require 'lib.php';
@@ -93,4 +92,3 @@ if ($a == 'new' || $a == 'edit') {
             return $out;
         });
 }
-page_end();

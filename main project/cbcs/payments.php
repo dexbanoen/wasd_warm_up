@@ -1,5 +1,4 @@
 <?php
-// Item 7: make a payment for a club member, and see the payments against the yearly fee.
 require 'lib.php';
 $error = ''; $memberID = get('memberID', post('memberID'));
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -32,4 +31,3 @@ if ($memberID !== '') {
     echo '<h2>Payments</h2>';
     table(rows('SELECT paymentID, paymentDate, amount, method, membershipYear, installmentNum FROM Payments WHERE memberID = ? ORDER BY membershipYear, installmentNum', array($memberID)));
 }
-page_end();

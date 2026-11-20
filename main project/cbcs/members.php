@@ -1,6 +1,4 @@
 <?php
-// Item 4: create, display, edit and delete a club member (major or minor).
-// The display page also adds a height/weight measurement and moves the member to another location.
 require 'lib.php';
 $a = get('a', 'list'); $error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -14,7 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($a == 'measure') {
             q('INSERT INTO MemberMeasurements (memberID, measureDate, heightCm, weightKg) VALUES (?, ?, ?, ?)',
                 array($id, post('measureDate'), post('heightCm'), post('weightKg')));
-        } elseif ($a == 'move') {       // end the current period the day before, then start the new one
+        } elseif ($a == 'move') {
+            // end the current period the day before, then start the new one
             q('UPDATE MemberLocations SET endDate = DATE_SUB(?, INTERVAL 1 DAY) WHERE memberID = ? AND endDate IS NULL', array(post('startDate'), $id));
             q('INSERT INTO MemberLocations (memberID, locationID, startDate, endDate) VALUES (?, ?, ?, NULL)', array($id, post('locationID'), post('startDate')));
         } else {
@@ -25,7 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $pc = save_postal(post('postalCode'), post('city'), post('province'));
             $values = array(post('firstName'), post('lastName'), post('DOB'), post('gender'), post('joinDate'), post('SSN'), post('medicareNum'),
                 post('phone'), post('address'), $pc, post('email'));
-            if ($id === '') {           // memberID is not given: AUTO_INCREMENT assigns the club member number
+            if ($id === '') {
+                // memberID is not given: AUTO_INCREMENT assigns the club member number
                 q('INSERT INTO ClubMembers (firstName, lastName, DOB, gender, joinDate, SSN, medicareNum, phone, address, postalCode, email)
                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $values);
                 $id = db()->lastInsertId();
@@ -141,4 +141,3 @@ if ($a == 'new' || $a == 'edit') {
                 . delete_button('members.php', $r['memberID'], 'member ' . $r['memberID'] . ' ' . $r['firstName'] . ' ' . $r['lastName']);
         });
 }
-page_end();
