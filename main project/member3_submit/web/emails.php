@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             array($day, $day, $day));
         go('emails.php?day=' . $day . '&msg=' . urlencode($st->rowCount() . ' email(s) generated and logged.'));
     } catch (PDOException $e) {
-        $error = friendly($e);
+        $error = ErroMSG($e);
     }
 }
 
@@ -62,6 +62,6 @@ try {
     $scheduler = row('SELECT @@event_scheduler AS s');
     echo '<p>Event scheduler of the server: ' . h($scheduler['s']) . '. The event only runs by itself when it is ON.</p>';
 } catch (PDOException $e) {
-    show_error(friendly($e));
+    show_error(ErroMSG($e));
 }
 page_end();
