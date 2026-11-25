@@ -1,7 +1,10 @@
 <?php
 // Item 1: create, display, edit and delete a location.
 require 'lib.php';
-$a = get('a', 'list'); $error = '';
+
+$a = get('a', 'list'); 
+$error = '';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         if ($a == 'delete') {
@@ -26,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         go('locations.php?msg=' . urlencode('Location saved.'));
     } catch (PDOException $e) {
         if (db()->inTransaction()) db()->rollBack();
-        $error = friendly($e);
+        $error = ErroMSG($e);
         if ($a == 'delete') $a = 'list';
     }
 }

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         go('payments.php?memberID=' . $memberID . '&msg='
             . urlencode('Payment recorded as installment ' . $next['n'] . ' of ' . post('membershipYear') . '.'));
     } catch (PDOException $e) {
-        $error = friendly($e);
+        $error = ErroMSG($e);
     }
 }
 
