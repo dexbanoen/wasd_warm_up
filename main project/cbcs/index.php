@@ -10,7 +10,8 @@ $cards = array(
     'Family members' => array('SELECT COUNT(*) FROM FamilyMembers', 'family.php'),
     'Teams' => array('SELECT COUNT(*) FROM Teams', 'teams.php'),
     'Sessions' => array('SELECT COUNT(*) FROM Sessions', 'sessions.php'),
-    'Emails logged' => array('SELECT COUNT(*) FROM EmailLog', 'emails.php'));
+    'Emails logged' => array('SELECT COUNT(*) FROM EmailLog', 'emails.php')
+);
 echo '<div class="cards">';
 foreach ($cards as $label => list($sql, $page))
     echo '<a class="card" href="' . $page . '"><b>' . q($sql)->fetchColumn() . '</b>' . h($label) . '</a>';

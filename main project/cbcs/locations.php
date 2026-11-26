@@ -1,6 +1,7 @@
 <?php
 require 'lib.php';
-$a = get('a', 'list'); $error = '';
+$a = get('a', 'list');
+$error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         if ($a == 'delete') {
@@ -11,7 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pc = save_postal(post('postalCode'), post('city'), post('province'));
         $values = array(post('type'), post('name'), post('address'), $pc, nul(post('webAddress')), post('maxCapacity'));
         if (post('id') === '') {
-            q('INSERT INTO Locations (type, name, address, postalCode, webAddress, maxCapacity) VALUES (?, ?, ?, ?, ?, ?)', $values);
+            q('INSERT INTO Locations (type, name, address, postalCode, webAddress, maxCapacity) VALUES (?, ?, ?, ?, ?, ?)',
+                $values);
             $id = db()->lastInsertId();
         } else {
             $id = post('id');
@@ -20,13 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             q('DELETE FROM LocationPhones WHERE locationID = ?', array($id));
         }
         foreach (explode(',', post('phones')) as $phone)
-            if (trim($phone) !== '') q('INSERT INTO LocationPhones (locationID, phone) VALUES (?, ?)', array($id, trim($phone)));
+            if (trim($phone) !== '')
+                q('INSERT INTO LocationPhones (locationID, phone) VALUES (?, ?)', array($id, trim($phone)));
         db()->commit();
         go('locations.php?msg=' . urlencode('Location saved.'));
     } catch (PDOException $e) {
-        if (db()->inTransaction()) db()->rollBack();
+        if (db()->inTransaction())
+            db()->rollBack();
         $error = friendly($e);
-        if ($a == 'delete') $a = 'list';
+        if ($a == 'delete')
+            $a = 'list';
     }
 }
 page_start('Locations');
@@ -38,7 +43,8 @@ if ($a == 'new' || $a == 'edit') {
         $r = row("SELECT l.*, pc.city, pc.province,
                       (SELECT GROUP_CONCAT(lp.phone ORDER BY lp.phone SEPARATOR ', ') FROM LocationPhones lp WHERE lp.locationID = l.locationID) AS phones
                   FROM Locations l JOIN PostalCodes pc ON pc.postalCode = l.postalCode WHERE l.locationID = ?", array(get('id')));
-    if ($_POST) $r = array_merge($r, $_POST);
+    if ($_POST)
+        $r = array_merge($r, $_POST);
     echo '<form method="post" class="box" action="locations.php?a=' . $a . '&id=' . h($r['locationID']) . '">';
     echo '<input type="hidden" name="id" value="' . h($r['locationID']) . '">';
     select('Type', 'type', array('Branch' => 'Branch', 'Head' => 'Head'), $r['type']);

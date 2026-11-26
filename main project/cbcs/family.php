@@ -2,7 +2,8 @@
 // The primary family member is in FamilyMembers; the secondary family member (a second
 // contact named by the primary one) is in SecondaryFamilyMembers.
 require 'lib.php';
-$a = get('a', 'list'); $error = '';
+$a = get('a', 'list');
+$error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         if ($a == 'delete') {
@@ -15,9 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         db()->beginTransaction();
         $pc = save_postal(post('postalCode'), post('city'), post('province'));
-        $values = array(post('firstName'), post('lastName'), post('DOB'), post('SSN'), post('medicareNum'), post('phone'), post('address'), $pc, nul(post('email')), post('locationID'));
+        $values = array(post('firstName'), post('lastName'), post('DOB'), post('SSN'), post('medicareNum'), post('phone'),
+            post('address'), $pc, nul(post('email')), post('locationID'));
         if (post('id') === '') {
-            q('INSERT INTO FamilyMembers (firstName, lastName, DOB, SSN, medicareNum, phone, address, postalCode, email, locationID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $values);
+            q('INSERT INTO FamilyMembers (firstName, lastName, DOB, SSN, medicareNum, phone, address, postalCode, email, locationID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                $values);
             $id = db()->lastInsertId();
         } else {
             $id = post('id');
@@ -28,16 +31,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (post('sFirstName') !== '') {
             $sec = array(post('sFirstName'), post('sLastName'), post('sPhone'), post('sRelationship'));
             if (row('SELECT familyMemberID FROM SecondaryFamilyMembers WHERE familyMemberID = ?', array($id)))
-                q('UPDATE SecondaryFamilyMembers SET firstName = ?, lastName = ?, phone = ?, relationship = ? WHERE familyMemberID = ?', array_merge($sec, array($id)));
+                q('UPDATE SecondaryFamilyMembers SET firstName = ?, lastName = ?, phone = ?, relationship = ? WHERE familyMemberID = ?',
+                    array_merge($sec, array($id)));
             else
-                q('INSERT INTO SecondaryFamilyMembers (firstName, lastName, phone, relationship, familyMemberID) VALUES (?, ?, ?, ?, ?)', array_merge($sec, array($id)));
+                q('INSERT INTO SecondaryFamilyMembers (firstName, lastName, phone, relationship, familyMemberID) VALUES (?, ?, ?, ?, ?)',
+                    array_merge($sec, array($id)));
         }
         db()->commit();
         go('family.php?msg=' . urlencode('Family member saved.'));
     } catch (PDOException $e) {
-        if (db()->inTransaction()) db()->rollBack();
+        if (db()->inTransaction())
+            db()->rollBack();
         $error = friendly($e);
-        if ($a == 'delete' || $a == 'delsecondary') $a = 'list';
+        if ($a == 'delete' || $a == 'delsecondary')
+            $a = 'list';
     }
 }
 page_start('Family members');
@@ -47,12 +54,17 @@ if ($a == 'new' || $a == 'edit') {
         'address' => '', 'city' => '', 'province' => 'QC', 'postalCode' => '', 'email' => '', 'locationID' => '',
         'sFirstName' => '', 'sLastName' => '', 'sPhone' => '', 'sRelationship' => 'Other');
     if ($a == 'edit') {
-        $r = array_merge($r, row('SELECT f.*, pc.city, pc.province FROM FamilyMembers f JOIN PostalCodes pc ON pc.postalCode = f.postalCode WHERE f.familyMemberID = ?', array(get('id'))));
-        $s = row('SELECT firstName AS sFirstName, lastName AS sLastName, phone AS sPhone, relationship AS sRelationship FROM SecondaryFamilyMembers WHERE familyMemberID = ?', array(get('id')));
-        if ($s) $r = array_merge($r, $s);
+        $r = array_merge($r, row('SELECT f.*, pc.city, pc.province FROM FamilyMembers f JOIN PostalCodes pc ON pc.postalCode = f.postalCode WHERE f.familyMemberID = ?',
+            array(get('id'))));
+        $s = row('SELECT firstName AS sFirstName, lastName AS sLastName, phone AS sPhone, relationship AS sRelationship FROM SecondaryFamilyMembers WHERE familyMemberID = ?',
+            array(get('id')));
+        if ($s)
+            $r = array_merge($r, $s);
     }
-    if ($_POST) $r = array_merge($r, $_POST);
-    echo '<form method="post" class="box" action="family.php?a=' . $a . '&id=' . h($r['familyMemberID']) . '"><input type="hidden" name="id" value="' . h($r['familyMemberID']) . '">';
+    if ($_POST)
+        $r = array_merge($r, $_POST);
+    echo '<form method="post" class="box" action="family.php?a=' . $a . '&id=' . h($r['familyMemberID'])
+        . '"><input type="hidden" name="id" value="' . h($r['familyMemberID']) . '">';
     echo '<h2 class="wide">Primary family member</h2>';
     field('First name', 'firstName', $r['firstName'], 'text', 'required');
     field('Last name', 'lastName', $r['lastName'], 'text', 'required');
